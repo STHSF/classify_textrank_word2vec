@@ -1,5 +1,13 @@
 import java.io.File
 
+import org.apache.spark.mllib.feature.Word2VecModel
+import org.apache.spark.{SparkContext, SparkConf}
+import org.apache.spark.mllib.classification.{SVMWithSGD, SVMModel}
+import org.apache.spark.mllib.evaluation.MulticlassMetrics
+import org.apache.spark.mllib.regression.LabeledPoint
+import org.apache.spark.rdd.RDD
+import utils.{DirectoryUtil, JSONUtil}
+
 /**
   * Created by li on 2016/10/13.
   * 分类模型训练程序。
@@ -58,6 +66,7 @@ object ClassifyModel {
 
   /**
     * 分类模型
+    *
     * @param trainDataRdd
     * @return
     */

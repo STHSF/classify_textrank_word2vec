@@ -58,7 +58,7 @@ object ClassifyPredict {
       val predictionFeature = classifyModel.predict(Vectors.dense(point))
 
       val stopTime = System.currentTimeMillis() - startTime
-      println(s"""耗时: $stopTime""")
+      println(s"耗时: $stopTime")
       println(predictionFeature)
     }
 
