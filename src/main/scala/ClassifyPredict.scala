@@ -1,4 +1,8 @@
-
+import org.apache.spark.mllib.classification.SVMModel
+import org.apache.spark.mllib.feature.Word2VecModel
+import org.apache.spark.mllib.linalg.Vectors
+import org.apache.spark.{SparkContext, SparkConf}
+import utils.{AnsjAnalyzer, JSONUtil}
 
 /**
   * Created by li on 2016/10/17.
