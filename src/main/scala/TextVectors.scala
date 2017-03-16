@@ -135,26 +135,28 @@ object TextVectors {
     * 对已经分词的文档进行特征处理，并生成labelpoint的格式, 平衡集, 考虑关键词权重
     *
     * @param doc 需要处理的文本
-    * @param model 词向量模型
-    * @param modelSize 词向量模型中词向量的维度
+    * @param word2VecModel 词向量模型
+    * @param vectorSize 词向量模型中词向量的维度
     * @param isModel 是否是词向量模型
     * @return
     */
   def textVectorsWithWeight(doc:(Double, Array[String]),
-                            model: Word2VecModel,
-                            modelSize:Int,
+                            word2VecModel: Word2VecModel,
+                            vectorSize:Int,
                             isModel:Boolean): LabeledPoint = {
     val label = doc._1
     val seg = doc._2
 
     //textRank, 使用textRank提取关键词（实体词抽取）
     val keywords = TextRank.run("exact", 10, seg.toList, 20, 50, 0.85f)
+    // 过滤掉关键词字数少于2的关键词。
     val keywordsFilter = keywords.toArray.filter(word => word._1.length >= 2)
     //      println(s"[$label] " + keywordsFilter.toList)
 
     if (isModel) {
+      // 如果是构造训练集的话，则构造labelPoint格式的数据，逻辑有点问题，本来doc就是labelPoint格式的数据。
 
-      val resultTemp = doc2vecModelWithWeight(keywordsFilter, model, modelSize)
+      val resultTemp = doc2vecModelWithWeight(keywordsFilter, word2VecModel, vectorSize)
       val vector = Vectors.dense(resultTemp)
       return LabeledPoint(label, vector)
 

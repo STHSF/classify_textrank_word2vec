@@ -3,7 +3,6 @@ package utils
 import org.json.JSONObject
 
 import scala.io.Source
-import scala.util.parsing.json.JSON
 
 
 /**
@@ -35,25 +34,25 @@ object JSONUtil {
     */
   def getValue(key1: String, key2: String): String = {
 
-    val jsonPath = "/Users/li/workshop/MyRepository/Word2Vec/src/main/scala/twc/W2VJsonConf.json"
+    val jsonPath = "/Users/li/workshop/MyRepository/classify_textrank_word2vec/src/main/resources/W2VJsonConf.json"
     initConfig(jsonPath)
     config.getJSONObject(key1).getString(key2)
   }
 
 
-  private def readConfigFile(confDir: String): Map[String, Any] = {
-
-    val jsonFile = Source.fromFile(confDir).mkString
-
-    val json = JSON.parseFull(jsonFile)
-
-    json match {
-
-      case Some(map: Map[String, Any]) => map
-      //      case None => println("Parsing failed")
-      //      case other => println("Unknown data structure: " + other)
-    }
-
-  }
+//  private def readConfigFile(confDir: String): Map[String, Any] = {
+//
+//    val jsonFile = Source.fromFile(confDir).mkString
+//
+//    val json = JSON.parseFull(jsonFile)
+//
+//    json match {
+//
+//      case Some(map: Map[String, Any]) => map
+//      //      case None => println("Parsing failed")
+//      //      case other => println("Unknown data structure: " + other)
+//    }
+//
+//  }
 
 }

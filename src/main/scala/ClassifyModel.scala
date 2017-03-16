@@ -15,7 +15,7 @@ import utils.{DirectoryUtil, JSONUtil}
   */
 object ClassifyModel {
 
-  /**
+    /**
     * 准确度统计分析
     *
     * @param predictionAndLabel
@@ -113,7 +113,7 @@ object ClassifyModel {
     val word2vecModelPath = JSONUtil.getValue("w2v", "w2vmodelPath")
     //向量的长度
     val vectorSize = JSONUtil.getValue("w2v", "w2vmodelSize").toInt
-    //是否是模型
+    //是否是构造训练集模型
     val isModel = JSONUtil.getValue("w2v", "isModel").toBoolean
     //导入word2vec模型
     val w2vModel = Word2VecModel.load(sc, word2vecModelPath)
