@@ -1,6 +1,6 @@
 
 import breeze.linalg._
-import org.apache.spark.mllib.feature.Word2VecModel
+import org.apache.spark.mllib.feature.{Normalizer, Word2VecModel}
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.rdd.RDD
@@ -157,9 +157,11 @@ object TextVectors {
       // 如果是构造训练集的话，则构造labelPoint格式的数据，逻辑有点问题，本来doc就是labelPoint格式的数据。
 
       val resultTemp = doc2vecModelWithWeight(keywordsFilter, word2VecModel, vectorSize)
-      val vector = Vectors.dense(resultTemp)
+      val vec = Vectors.dense(resultTemp)
+      // 向量归一化
+      val l2 = new Normalizer(2)
+      val vector = l2.transform(vec)
       return LabeledPoint(label, vector)
-
     } else {
 
       return null
